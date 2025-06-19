@@ -39,6 +39,7 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
+        port: 22
         script: |
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/proomed-website:latest
           docker stop proomed-website || true
@@ -46,4 +47,6 @@ jobs:
           docker run -d --name proomed-website -p 80:3000 --restart unless-stopped ${{ secrets.DOCKERHUB_USERNAME }}/proomed-website:latest
 
           # Optional: Restart Nginx if needed
+          # sudo systemctl restart nginx || true
+            # sudo service nginx restart || true
         
